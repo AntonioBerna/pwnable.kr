@@ -149,4 +149,4 @@ mommy! I think I know what a file descriptor is!!
 
 ## collision
 
-TODO
+...
