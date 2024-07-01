@@ -12,7 +12,7 @@ The aim of these games is to find the flag, in fact they are real CTFs (Capture 
 
 Following the game instructions, you need to connect to a remote machine using the following command:
 
-```shell
+```
 ssh fd@pwnable.kr -p2222
 ```
 
@@ -21,7 +21,7 @@ ssh fd@pwnable.kr -p2222
 
 If everything went well you should get a result similar to this:
 
-```shell
+```
  ____  __    __  ____    ____  ____   _        ___      __  _  ____  
 |    \|  |__|  ||    \  /    ||    \ | |      /  _]    |  |/ ]|    \ 
 |  o  )  |  |  ||  _  ||  o  ||  o  )| |     /  [_     |  ' / |  D  )
@@ -42,7 +42,7 @@ fd@pwnable:~$
 
 Let's try using the `ls -la` command to see which files we have access to:
 
-```shell
+```
 fd@pwnable:~$ ls -la
 total 40
 drwxr-x---   5 root   fd   4096 Oct 26  2016 .
@@ -58,14 +58,14 @@ drwxr-xr-x   2 root   root 4096 Oct 23  2016 .pwntools-cache
 
 as you can imagine, the flag we are looking for is found inside the `flag` file, however, as you can imagine from the permissions, we cannot view the content, in fact using the `cat flag` command we obtain:
 
-```shell
+```
 fd@pwnable:~$ cat flag 
 cat: flag: Permission denied
 ```
 
 We therefore note that there is an ELF file, i.e. `fd`, correlated by the `fd.c` source whose contents we can view using the `cat fd.c` command:
 
-```shell
+```
 fd@pwnable:~$ cat fd.c 
 #include <stdio.h>
 #include <stdlib.h>
@@ -127,14 +127,14 @@ In this code we notice:
 
 Therefore, it is clear that to exploit this code to our advantage we will need to enter a number from the command line that allows us to redirect the `fd` file descriptor in our favor. Well this number is precisely the conversion into an integer of the number `0x1234` which can be obtained using the following command:
 
-```shell
+```
 fd@pwnable:~$ python -c "print(int(0x1234))"
 4660
 ```
 
 In fact, the integer difference between `4660` and itself results in `fd = 0`. This means that the file descriptor is associated with `stdin` which corresponds precisely to `fd = 0`. So the `read()` function will read from `stdin` any data that we decide to write and in particular we should write the string `LETMEWIN`. Let's see it in action:
 
-```shell
+```
 fd@pwnable:~$ ./fd 4660
 LETMEWIN
 good job :)
@@ -143,7 +143,7 @@ mommy! I think I know what a file descriptor is!!
 
 Perfect, everything went according to plan! So as you can imagine the flag you are looking for is the following sentence:
 
-```shell
+```
 mommy! I think I know what a file descriptor is!!
 ```
 
