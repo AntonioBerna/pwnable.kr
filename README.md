@@ -8,6 +8,9 @@ The aim of these games is to find the flag, in fact they are real CTFs (Capture 
 > [!CAUTION]
 > Registration is required to solve the levels.
 
+> [!WARNING]
+> This repository is unfinished. Keep your expectations low.
+
 ## fd
 
 Following the game instructions, you need to connect to a remote machine using the following command:
