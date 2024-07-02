@@ -6,7 +6,7 @@ The aim of these games is to find the flag, in fact they are real CTFs (Capture 
 > For more information about games visit [https://pwnable.kr/play.php](https://pwnable.kr/play.php).
 
 > [!CAUTION]
-> Registration is required to solve the levels.
+> Registration is required to solve the games.
 
 > [!WARNING]
 > This repository is unfinished. Keep your expectations low.
@@ -135,7 +135,7 @@ fd@pwnable:~$ python -c "print(int(0x1234))"
 4660
 ```
 
-In fact, the integer difference between `4660` and itself results in `fd = 0`. This means that the file descriptor is associated with `stdin` which corresponds precisely to `fd = 0`. So the `read()` function will read from `stdin` any data that we decide to write and in particular we should write the string `LETMEWIN`. Let's see it in action:
+In fact, the integer difference between `4660` and itself results in `fd = 0`. This means that the file descriptor is associated with `stdin`. So the `read()` function will read from `stdin` any data that we decide to write and in particular we should write the string `LETMEWIN`. Let's see it in action:
 
 ```
 fd@pwnable:~$ ./fd 4660
