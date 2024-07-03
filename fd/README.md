@@ -154,7 +154,7 @@ print(bytes(process.recv()))
 print("Flag: " + str(bytes(process.recv())))
 ```
 
-then using the `python explot.py` command we get:
+then using the `python exploit.py` command we get:
 
 ```
 [+] Connecting to pwnable.kr on port 2222: Done
