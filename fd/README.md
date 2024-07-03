@@ -151,7 +151,7 @@ process = shell.process(executable="./fd", argv=["fd", "4660"])
 process.sendline("LETMEWIN".encode())
 
 print(bytes(process.recv()))
-print("Flag: " + str(bytes(process.recv())))
+print("Flag: ", bytes(process.recv()))
 ```
 
 then using the `python exploit.py` command we get:
