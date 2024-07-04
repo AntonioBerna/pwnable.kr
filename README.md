@@ -14,16 +14,8 @@ The only requirement is to install Python's [pwntools](https://pypi.org/project/
 
 ## Game solutions
 
-- Toddler's Bottle:
-    - [fd](https://github.com/AntonioBerna/pwnable.kr/blob/master/fd/)
-    - collision (TODO)
-    - ...
+| Toddler's Bottle                                                 | Rookiss | Grotesque | Hacker's Secret |
+| :---:                                                            | :----:  | :---:     | :---:           |
+| [fd](https://github.com/AntonioBerna/pwnable.kr/blob/master/fd/) | ...     | ...       | ...             |
+| collision (TODO)                                                 | ...     | ...       | ...             |
 
-- Rookiss:
-    - ...
-
-- Grotesque:
-    - ...
-
-- Hacker's Secret:
-    - ...
