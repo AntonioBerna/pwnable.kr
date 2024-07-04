@@ -120,7 +120,7 @@ In this code we notice:
 Therefore, it is clear that to exploit this code to our advantage we will need to enter a number from the command line that allows us to redirect the `fd` file descriptor in our favor. Well this number is precisely the conversion into an integer of the number `0x1234` which can be obtained using the following command:
 
 ```
-(venv) [berna@berna fd]$ python -c "print(0x1234)"
+[berna@berna fd]$ python -c "print(0x1234)"
 4660
 ```
 
