@@ -254,6 +254,9 @@ col@pwnable:~$ ./col $(python -c "print('\xc8\xce\xc5\x06\xc8\xce\xc5\x06\xc8\xc
 daddy! I just managed to create a hash collision :)
 ```
 
+> [!WARNING]
+> Pay attention to the fact that the `python` and `python3` commands are different, in fact the instruction for injecting the `payload`, used just now, uses `Python 2` since the `python` command was used. To use `Python 3` you need to use the command `./col $(python3 -c "import sys; sys.stdout.buffer.write(b'\xc8\xce\xc5\x06\xc8\xce\xc5\x06 \xc8\xce\xc5\x06\xc8\xce\xc5\x06\xcc\xce\xc5\x06')")`.
+
 Perfect, everything went according to plan! So as you can imagine the flag you are looking for is the following sentence:
 
 ```
