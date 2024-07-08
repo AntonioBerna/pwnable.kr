@@ -148,21 +148,24 @@ $$k = \frac{\text{hashcode}}{5}$$
 where $k$ represents exactly the single address which, if added to itself 5 times, allows us to obtain the starting address `0x21DD09EC`. The problem is that if we run the command `python -c "print(0x21DD09EC)"` we get:
 
 ```
-[berna@berna collision]$ python -c "print(0x21DD09EC)"
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python -c "print(0x21DD09EC)"
 568134124
 ```
 
 and therefore if we calculate the division we obtain:
 
 ```
-[berna@berna collision]$ python -c "print(0x21DD09EC / 5)"
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python -c "print(0x21DD09EC / 5)"
 113626824.8
 ```
 
 this means that the address contained in the `hashcode` variable is not divisible by 5 and therefore the remainder must be taken into consideration:
 
 ```
-[berna@berna collision]$ python -c "print(0x21DD09EC % 5)"
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python -c "print(0x21DD09EC % 5)"
 4
 ```
 
@@ -173,7 +176,8 @@ $$N = \lfloor{ Q \rfloor } \cdot D + R$$
 where $N$ is the numerator, $\lfloor{ Q \rfloor }$ is the quotient (more precisely it is the lower integer part), $D$ is the denominator and $R$ is the remainder. Therefore we can write:
 
 ```
-[berna@berna collision]$ python -c "print(113626824 * 5 + 4)"
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python -c "print(113626824 * 5 + 4)"
 568134124
 ```
 
@@ -206,8 +210,9 @@ ELF Header:
 as can be understood, it is an ELF file for a 32-bit architecture and this means that the integer pointers, i.e. `int *ip`, are represented with 4 bytes and this implies that there are 5 blocks with 4 bytes each. This last information is important because we need to prepare the strings to inject into the code. In particular, we can open a python shell using the `python` command (I recommend using a local shell and not the one used for the `ssh` connection):
 
 ```
-[berna@berna collision]$ python
-Python 3.12.4 (main, Jun  7 2024, 06:33:07) [GCC 14.1.1 20240522] on linux
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python                              
+Python 3.11.9 (main, Apr 10 2024, 13:16:36) [GCC 13.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from pwn import *
 >>> payload = p32(113626824) * 5 + p32(4)
@@ -221,14 +226,16 @@ in particular the `p32()` function is used to pack `113626824` and `4`, using 4 
 To solve this problems we need to think slightly differently than we did now. All the considerations made are correct but to fix this problems we can dedicate 4 out of 5 blocks to the result of the division and 1 out of 5 blocks for the remaining representation. In particular the previous instruction:
 
 ```
-[berna@berna collision]$ python -c "print(113626824 * 5 + 4)"
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python -c "print(113626824 * 5 + 4)"
 568134124
 ```
 
 becomes the following:
 
 ```
-[berna@berna collision]$ python -c "print(0x21DD09EC - 113626824 * 4)"
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python -c "print(0x21DD09EC - 113626824 * 4)"
 113626828
 ```
 
@@ -237,8 +244,9 @@ that is, instead of dedicating 5 blocks and adding the remainder (as happens her
 So let's try using a python shell again as before:
 
 ```
-(venv) [berna@berna collision]$ python
-Python 3.12.4 (main, Jun  7 2024, 06:33:07) [GCC 14.1.1 20240522] on linux
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ python                                       
+Python 3.11.9 (main, Apr 10 2024, 13:16:36) [GCC 13.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from pwn import *
 >>> payload = p32(113626824) * 4 + p32(113626828)
@@ -255,7 +263,7 @@ daddy! I just managed to create a hash collision :)
 ```
 
 > [!WARNING]
-> Pay attention to the fact that the `python` and `python3` commands are different, in fact the instruction for injecting the `payload`, used just now, uses `Python 2` since the `python` command was used. To use `Python 3` you need to use the command `./col $(python3 -c "import sys; sys.stdout.buffer.write(b'\xc8\xce\xc5\x06\xc8\xce\xc5\x06 \xc8\xce\xc5\x06\xc8\xce\xc5\x06\xcc\xce\xc5\x06')")`.
+> Pay attention to the fact that the `python` and `python3` commands are different, in fact the instruction for injecting the `payload`, used just now, uses `Python 2` since the `python` command was used. To use `Python 3` you need to use the command `./col $(python3 -c "import sys; sys.stdout.buffer.write(b'\xc8\xce\xc5\x06\xc8\xce\xc5\x06\xc8\xce\xc5\x06\xc8\xce\xc5\x06\xcc\xce\xc5\x06')")`.
 
 Perfect, everything went according to plan! So as you can imagine the flag you are looking for is the following sentence:
 
