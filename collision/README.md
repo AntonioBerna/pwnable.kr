@@ -278,7 +278,7 @@ Finally, we can use the following exploit, written in `Python`, to replicate the
 ```python
 from pwn import *
 
-hashcode = 0x21DD09EC 
+hashcode = 0x21DD09EC
 one_block = hashcode // 5 # 113626824
 remaining_data = hashcode - one_block * 4 # 113626828
 payload = p32(one_block) * 4 + p32(remaining_data)
@@ -286,7 +286,7 @@ payload = p32(one_block) * 4 + p32(remaining_data)
 shell = ssh("col", "pwnable.kr", password="guest", port=2222)
 process = shell.process(executable="./col", argv=["col", payload])
 
-flag = str(process.recv())
+flag = process.recv().decode()
 log.success(f"Flag: {flag}")
 
 process.close()
@@ -304,7 +304,7 @@ then using the `python exploit.py` command we get:
     Version:  4.4.179
     ASLR:     Enabled
 [+] Starting remote process bytearray(b'./col') on pwnable.kr: pid 303168
-[+] Flag: b'daddy! I just managed to create a hash collision :)\n'
+[+] Flag: daddy! I just managed to create a hash collision :)
 [*] Stopped remote process 'col' on pwnable.kr (pid 303168)
 [*] Closed connection to 'pwnable.kr'
 ```
