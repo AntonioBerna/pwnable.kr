@@ -149,12 +149,12 @@ from pwn import *
 
 shell = ssh("fd", "pwnable.kr", password="guest", port=2222)
 process = shell.process(executable="./fd", argv=["fd", "4660"])
-process.sendline("LETMEWIN".encode())
+process.sendline(b"LETMEWIN")
 
-msg = process.recv()
-flag = process.recv()
-log.info(msg.decode())
-log.success(f"Flag: {flag.decode()}")
+msg = process.recv().decode()
+flag = process.recv().decode()
+log.info(msg)
+log.success(f"Flag: {flag}")
 
 process.close()
 shell.close()
