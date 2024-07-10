@@ -5,11 +5,14 @@
 Following the game instructions, you need to connect to a remote machine using the following command:
 
 ```
-ssh col@pwnable.kr -p2222
+┌──(kali㉿kali)-[~/pwnable.kr/collision]
+└─$ ssh col@pwnable.kr -p2222
 ```
 
 > [!WARNING]
 > The password to access the remote machine is `guest`.
+
+If everything went well you should get a result similar to this:
 
 ```
  ____  __    __  ____    ____  ____   _        ___      __  _  ____  
