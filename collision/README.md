@@ -289,8 +289,8 @@ payload = p32(one_block) * 4 + p32(remaining_data)
 shell = ssh("col", "pwnable.kr", password="guest", port=2222)
 process = shell.process(executable="./col", argv=["col", payload])
 
-flag = process.recv().decode()
-log.success(f"Flag: {flag}")
+flag = process.recvall().decode().strip()
+log.success(f"Flag: \"{flag}\"")
 
 process.close()
 shell.close()
@@ -307,7 +307,7 @@ then using the `python exploit.py` command we get:
     Version:  4.4.179
     ASLR:     Enabled
 [+] Starting remote process bytearray(b'./col') on pwnable.kr: pid 303168
-[+] Flag: daddy! I just managed to create a hash collision :)
+[+] Flag: "daddy! I just managed to create a hash collision :)"
 [*] Stopped remote process 'col' on pwnable.kr (pid 303168)
 [*] Closed connection to 'pwnable.kr'
 ```
