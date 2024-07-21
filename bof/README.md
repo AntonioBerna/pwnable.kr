@@ -265,7 +265,7 @@ In particular, among the `100` memory units that I asked to display with the `x/
 ...
 ```
 
-and it is no coincidence that the address `0xcafebabe` is also present among them. In particular we notice 3 rows made up of 4 columns which initially show the address `0x58585858` (i.e. the sequence `XXXX` of 4 characters) repeated several times and subsequently apparently random addresses until arriving at the address `0xdeadbeef` which must be replaced with the address `0xcafebabe`. Furthermore, in the last column there is another address `0x58585858`, so in total we have `3 * 4 + 1 = 13` addresses. So, `13` addresses before arriving at the address `0xdeadbeef` and each of these addresses represents 4 characters, so with `13 * 4 = 52` characters you arrive at the address `0xdeadbeef`.
+and it is no coincidence that the address `0xdeadbeef` is also present among them. In particular we notice 3 rows made up of 4 columns which initially show the address `0x58585858` (i.e. the sequence `XXXX` of 4 characters) repeated several times and subsequently apparently random addresses until arriving at the address `0xdeadbeef` which must be replaced with the address `0xcafebabe`. Furthermore, in the last column there is another address `0x58585858`, so in total we have `3 * 4 + 1 = 13` addresses. So, `13` addresses before arriving at the address `0xdeadbeef` and each of these addresses represents 4 characters, so with `13 * 4 = 52` characters you arrive at the address `0xdeadbeef`.
 
 > [!NOTE]
 > To exit `gdb` you can use the `q` command.
