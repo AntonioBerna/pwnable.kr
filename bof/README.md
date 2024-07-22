@@ -306,7 +306,7 @@ as can be understood, it is an ELF file for a 32-bit architecture. This last inf
 
 in particular `p32()` is used to package `0xcafebabe` into 32-bit little endian transforming it into `\xbe\xba\xfe\xca`. Furthermore the output is redirected inside a file called `payload`.
 
-Now we need to find a way to send the contents of the `payload` file to the program running on the hostname `pwnable.kr` on port `9000`. To view the contents of the `payload` file we can use the `cat` command which in turn, if no parameters are specified, will take the characters from `stdin` as input and output them to `stdout`. So what we can do is create a sub-shell that takes as input, via `cat`, the contents of the `payload` file and subsequently pipes it as input to the program running on the hostname `pwnable.kr` on port ` 9000`. To do all this we can use this command:
+Now we need to find a way to send the contents of the `payload` file to the program running on the hostname `pwnable.kr` on port `9000`. To view the contents of the `payload` file we can use the `cat` command which in turn, if no parameters are specified, will take the characters from `stdin` as input and output them to `stdout`. So what we can do is create a sub-shell that takes as input, via `cat`, the contents of the `payload` file and subsequently pipes it as input to the program running on the hostname `pwnable.kr` on port `9000`. To do all this we can use this command:
 
 ```
 ┌──(kali㉿kali)-[~/pwnable.kr/bof]
