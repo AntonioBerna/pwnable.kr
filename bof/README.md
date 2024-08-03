@@ -207,7 +207,6 @@ Breakpoint 2 at 0x56555654
 (gdb) c
 Continuing.
 overflow me : 
-
 ```
 
 Now we insert the `X` character a random number of times without causing `stack smashing detected`:
