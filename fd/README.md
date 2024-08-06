@@ -1,5 +1,14 @@
 # fd
 
+## Instructions
+
+Mommy! what is a file descriptor in Linux?
+
+```
+ssh fd@pwnable.kr -p2222
+(pw: guest)
+```
+
 ## step-by-step
 
 Following the game instructions, you need to connect to a remote machine using the following command:

