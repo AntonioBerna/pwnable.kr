@@ -22,4 +22,5 @@ The only requirement is to install Python's [pwntools](https://pypi.org/project/
 | [fd](https://github.com/AntonioBerna/pwnable.kr/blob/master/fd/)               | ...     | ...       | ...             |
 | [collision](https://github.com/AntonioBerna/pwnable.kr/blob/master/collision/) | ...     | ...       | ...             |
 | [bof](https://github.com/AntonioBerna/pwnable.kr/blob/master/bof/)             | ...     | ...       | ...             |
-| flag (TODO)                                                                    | ...     | ...       | ...             |
+| [flag](https://github.com/AntonioBerna/pwnable.kr/tree/master/flag)            | ...     | ...       | ...             |
+| passcode (TODO)                                                                | ...     | ...       | ...             |
