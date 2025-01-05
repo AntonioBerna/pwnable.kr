@@ -24,3 +24,7 @@ The only requirement is to install Python's [pwntools](https://pypi.org/project/
 | [bof](https://github.com/AntonioBerna/pwnable.kr/blob/master/bof/)             | ...     | ...       | ...             |
 | [flag](https://github.com/AntonioBerna/pwnable.kr/tree/master/flag)            | ...     | ...       | ...             |
 | passcode (TODO)                                                                | ...     | ...       | ...             |
+
+## Activity
+
+<img src="https://repobeats.axiom.co/api/embed/56e8418fdba5de32afd530b5bbdcf868322a485a.svg" width="100%" />
